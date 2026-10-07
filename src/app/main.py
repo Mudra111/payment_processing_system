@@ -1,13 +1,6 @@
 from fastapi import FastAPI
+from src.app.api.v1.router import api_router as api_router_v1
 
 app = FastAPI()
 
-
-@app.post("/register")
-def register():
-    return {"message": "Registered Successfully.."}
-
-
-@app.post("/login")
-def login():
-    return {"message": "Logged in successfully..."}
+app.include_router(api_router_v1, prefix="/api/v1")
