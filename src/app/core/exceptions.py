@@ -3,6 +3,7 @@ from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
 
 
+# standard exception handler
 def standard_exception_handler(
     status_code: int, message: str, errors: list | None = None
 ):
