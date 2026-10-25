@@ -6,6 +6,7 @@ from src.app.core.security import hash_password, verify_password
 from src.app.core.config import settings
 from src.app.core.exceptions import AppException
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from src.app.modules.wallet.service import initialize_wallet
 
 # jwt token
 from datetime import datetime, timedelta
@@ -42,6 +43,11 @@ def register_user(body: RegisterSchema, db: Session):
 
     try:
         db.add(new_user)
+        db.flush()
+
+        # Call create wallet method here
+        initialize_wallet(user_id=new_user.id, db=db)
+
         db.commit()
         db.refresh(new_user)
 
@@ -56,8 +62,6 @@ def register_user(body: RegisterSchema, db: Session):
     except SQLAlchemyError:
         db.rollback()
         raise
-
-    # Call create wallet method here
 
     return new_user
 
