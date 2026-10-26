@@ -13,6 +13,7 @@ from datetime import datetime, timedelta
 import jwt
 
 
+# register user with default wallet initializer
 def register_user(body: RegisterSchema, db: Session):
     existing_email = db.query(UserModel).filter(UserModel.email == body.email).first()
 
