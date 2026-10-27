@@ -46,7 +46,7 @@ def register_user(body: RegisterSchema, db: Session):
         db.add(new_user)
         db.flush()
 
-        # Call create wallet method here
+        # Call create wallet method
         initialize_wallet(user_id=new_user.id, db=db)
 
         db.commit()
