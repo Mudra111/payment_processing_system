@@ -16,6 +16,6 @@ def register(body: RegisterSchema, db: Session = Depends(get_db)):
 
 @router.post("/login")
 def login(body: LoginSchema, db: Session = Depends(get_db)):
-    body = body.model_dump()
+    # body = body.model_dump()
     token = login_user(body, db)
     return {"success": True, "message": "Logged in Successfully..", "token": token}
