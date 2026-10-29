@@ -8,6 +8,7 @@ from src.app.modules.user.models import UserModel
 from src.app.api.deps import get_db
 
 
+# check for token validation and return user
 def is_user_authenticated(request: Request, db: Session = Depends(get_db)):
     token = request.headers.get("authorization")
 
