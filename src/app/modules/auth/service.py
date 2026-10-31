@@ -67,6 +67,7 @@ def register_user(body: RegisterSchema, db: Session):
     return new_user
 
 
+# Login for existing user and return jwt token for authorized api calls
 def login_user(body: LoginSchema, db: Session):
     is_user = db.query(UserModel).filter(UserModel.email == body.email).first()
 
