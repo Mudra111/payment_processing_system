@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from src.app.modules.auth.router import router as auth_router
 from src.app.modules.user.router import router as user_router
 from src.app.modules.wallet.router import router as wallet_router
+from src.app.modules.payment.router import router as payment_router
 
 api_router = APIRouter()
 
@@ -10,3 +11,5 @@ api_router.include_router(auth_router, prefix="/auth", tags=["Auth"])
 api_router.include_router(user_router, prefix="/user", tags=["User"])
 
 api_router.include_router(wallet_router, prefix="/wallet", tags=["Wallet"])
+
+api_router.include_router(payment_router, prefix="/payments", tags=["Payments"])
