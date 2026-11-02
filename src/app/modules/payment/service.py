@@ -7,7 +7,7 @@ from src.app.modules.user.models import UserModel
 from src.app.modules.wallet.models import WalletModel
 from src.app.modules.payment.models import PaymentModel
 
-
+# create payment
 def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
     # body = body.model_dump()
 
