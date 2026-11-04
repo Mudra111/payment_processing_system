@@ -9,7 +9,6 @@ from src.app.modules.payment.models import PaymentModel
 
 # create payment
 def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
-    # body = body.model_dump()
 
     # Check if Sender_id is same as user id we get from jwt token
     if body.sender_id != user.id:
