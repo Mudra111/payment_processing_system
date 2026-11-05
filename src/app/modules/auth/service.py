@@ -15,6 +15,8 @@ import jwt
 
 # register user with default wallet initializer
 def register_user(body: RegisterSchema, db: Session):
+
+    # Check for already existing email
     existing_email = db.query(UserModel).filter(UserModel.email == body.email).first()
 
     if existing_email:
