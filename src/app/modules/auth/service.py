@@ -25,6 +25,7 @@ def register_user(body: RegisterSchema, db: Session):
             message="Email Already Exist",
         )
 
+    # Check for existing username
     existing_username = (
         db.query(UserModel).filter(UserModel.username == body.username).first()
     )
