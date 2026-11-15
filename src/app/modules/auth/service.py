@@ -36,6 +36,7 @@ def register_user(body: RegisterSchema, db: Session):
             message="Username Already Exist",
         )
 
+    # hash user password to store hashed password
     hashed_password = hash_password(body.password)
 
     new_user = UserModel(
