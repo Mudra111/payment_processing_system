@@ -7,6 +7,7 @@ from src.app.modules.user.models import UserModel
 from src.app.modules.wallet.models import WalletModel
 from src.app.modules.payment.models import PaymentModel
 
+
 # create payment
 def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
 
@@ -71,5 +72,7 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
 
     db.commit()
     db.refresh(new_payment)
+
+    # send processing task to background worker
 
     return new_payment
