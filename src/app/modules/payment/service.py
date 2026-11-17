@@ -69,7 +69,8 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
     )
 
     db.add(new_payment)
-
+    
+    # save database changes
     db.commit()
     db.refresh(new_payment)
 
