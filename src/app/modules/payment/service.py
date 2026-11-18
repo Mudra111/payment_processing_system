@@ -12,12 +12,13 @@ from src.app.modules.payment.models import PaymentModel
 def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
 
     # Check if Sender_id is same as user id we get from jwt token
-    if body.sender_id != user.id:
-        raise AppException(
-            status_code=status.HTTP_400_BAD_REQUEST,
-            message="Unauthorized to send payment with this sender_id",
-        )
+    # if body.sender_id != user.id:
+    #     raise AppException(
+    #         status_code=status.HTTP_400_BAD_REQUEST,
+    #         message="Unauthorized to send payment with this sender_id",
+    #     )
 
+    # take sender user from jwt token directly
     sender_user = user
 
     # Check if sender user's wallet exist or not
@@ -50,6 +51,8 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
             message="Receiver user wallet not found",
         )
 
+    # check if sender user and receiver user has same currency
+
     # Check if sender user has enough budget for this payment or not
     if sender_wallet.balance < body.amount:
         raise AppException(
@@ -69,7 +72,7 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
     )
 
     db.add(new_payment)
-    
+
     # save database changes
     db.commit()
     db.refresh(new_payment)
