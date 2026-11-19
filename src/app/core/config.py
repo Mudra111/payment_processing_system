@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     SECRET_KEY: str
     EXP_TIME: int
     ALGORITHM: str
+    REDIS_URL: str
 
 
 settings = Settings()
