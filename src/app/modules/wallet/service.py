@@ -6,8 +6,8 @@ from fastapi import status
 
 
 # Initialize new wallet for new user
-def initialize_wallet(user_id: int, db: Session):
-    new_wallet = WalletModel(user_id=user_id)
+def initialize_wallet(user_id: int, currency: str, db: Session):
+    new_wallet = WalletModel(user_id=user_id, currency=currency)
     db.add(new_wallet)
     db.flush()
     return new_wallet

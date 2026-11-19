@@ -1,7 +1,8 @@
 from src.app.infrastructure.database.base import Base
-from sqlalchemy import Integer, Numeric, ForeignKey
+from sqlalchemy import Integer, Numeric, ForeignKey, Enum as SQLAlchemyEnum
 from sqlalchemy.orm import Mapped, mapped_column
 from decimal import Decimal
+from src.app.shared.enums import CurrencyEnum
 
 
 class WalletModel(Base):
@@ -15,4 +16,8 @@ class WalletModel(Base):
 
     balance: Mapped[Decimal] = mapped_column(
         Numeric(precision=12, scale=2), default=Decimal("10000.00"), nullable=False
+    )
+
+    currency: Mapped[CurrencyEnum] = mapped_column(
+        SQLAlchemyEnum(CurrencyEnum), nullable=False, default=CurrencyEnum.INR
     )

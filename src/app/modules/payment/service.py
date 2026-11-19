@@ -52,6 +52,11 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
         )
 
     # check if sender user and receiver user has same currency
+    if sender_wallet.currency != receiver_wallet.currency:
+        raise AppException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            message="Currency not matched with receiver",
+        )
 
     # Check if sender user has enough budget for this payment or not
     if sender_wallet.balance < body.amount:
