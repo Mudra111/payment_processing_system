@@ -2,6 +2,7 @@ from celery import Celery
 
 from src.app.core.config import settings
 
+# celery app
 celery_app = Celery(
     "payment_processing", broker=settings.REDIS_URL, backend="redis://localhost:6379/1"
 )
