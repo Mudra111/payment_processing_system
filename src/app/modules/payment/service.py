@@ -85,3 +85,22 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
     # send processing task to background worker
 
     return new_payment
+
+
+def validate_payment_status(paymnet_id: int, db: Session):
+    payment = db.query(PaymentModel).filter(PaymentModel.id == paymnet_id)
+
+    if not payment:
+        return False
+        # return AppException(
+        #     status_code=status.HTTP_404_NOT_FOUND, message="Payment not found"
+        # )
+
+    if not payment == "PENDING":
+        return False
+        # return AppException(
+        #     status_code=status.HTTP_406_NOT_ACCEPTABLE,
+        #     message="Paymnet Already Processed",
+        # )
+
+    return True
