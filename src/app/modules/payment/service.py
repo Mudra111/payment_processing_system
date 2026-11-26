@@ -86,7 +86,7 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
 
     return new_payment
 
-
+# validate payment status
 def validate_payment_status(paymnet_id: int, db: Session):
     payment = db.query(PaymentModel).filter(PaymentModel.id == paymnet_id)
 
