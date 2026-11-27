@@ -65,7 +65,7 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
             message="Insufficient balance for this transaction",
         )
 
-    # Create payment with status PENDING
+    # Create payment with status 'PENDING'
     new_payment = PaymentModel(
         sender_id=body.sender_id,
         receiver_id=body.receiver_id,
@@ -85,6 +85,7 @@ def create_payment(body: CreatePaymentSchema, db: Session, user: UserSchema):
     # send processing task to background worker
 
     return new_payment
+
 
 # validate payment status
 def validate_payment_status(paymnet_id: int, db: Session):
